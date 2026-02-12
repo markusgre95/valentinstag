@@ -89,7 +89,19 @@ button {
   h1 { font-size: 1.5em; }
   h2 { font-size: 1.2em; }
   p { font-size: 1em; }
-  button { padding: 12px 20px; font-size: 1em; min-width: 90px; }
+  button { 
+    padding: 12px 20px; 
+    font-size: 1em; 
+    min-width: 90px; 
+    position: relative;  /* Relativ, nicht mehr absolute */
+    transform: none;     /* Reset transform für Mobile */
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Abstand zwischen den Buttons */
+    height: auto; /* Höhe anpassen */
+  }
 }
 </style>
 </head>
