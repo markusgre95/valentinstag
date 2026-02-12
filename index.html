@@ -27,6 +27,7 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 400px;
+  position: relative;
 }
 
 img {
@@ -54,7 +55,7 @@ h2 {
 .buttons {
   margin-top: 25px;
   position: relative;
-  height: 100px;
+  height: 120px;
 }
 
 button {
@@ -63,20 +64,32 @@ button {
   border: none;
   font-size: 1.1em;
   cursor: pointer;
-  margin: 10px;
-  transition: 0.2s;
+  transition: transform 0.2s ease;
   min-width: 100px;
+  position: absolute;
 }
 
 #yes {
   background: white;
   color: #ff4d6d;
+  left: 20%;
+  bottom: 0;
+  position: relative;
 }
 
 #no {
   background: #ff4d6d;
   color: white;
-  position: absolute;
+  right: 20%;
+  bottom: 0;
+}
+
+/* Mobile-Optimierung */
+@media (max-width: 500px) {
+  h1 { font-size: 1.5em; }
+  h2 { font-size: 1.2em; }
+  p { font-size: 1em; }
+  button { padding: 12px 20px; font-size: 1em; min-width: 90px; }
 }
 </style>
 </head>
@@ -97,28 +110,58 @@ button {
 
   <div class="buttons">
     <button id="yes" onclick="sayYes()">Ja 🫶</button>
-    <button id="no" ontouchstart="moveButton()" onmouseover="moveButton()">Nein 🙄</button>
+    <button id="no" onmouseover="moveButton()" ontouchstart="moveButton()">Nein 🙄</button>
   </div>
 </div>
 
 <script>
 function sayYes() {
-  document.body.innerHTML = `
-    <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;color:white;padding:20px;">
-      <div>
-        <h1>Ich wusste es 😍❤️</h1>
-        <p>Hihi</p>
-      </div>
-    </div>
+  const overlay = document.createElement("div");
+  overlay.style.cssText = `
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    color:white;
+    padding:20px;
+    flex-direction: column;
   `;
+  overlay.innerHTML = `
+    <h1>Ich wusste es 😍❤️</h1>
+    <p>Hihi</p>
+  `;
+  document.body.appendChild(overlay);
+  
+  document.querySelector(".card").style.display = "none";
 }
 
 function moveButton() {
   const button = document.getElementById("no");
-  const x = Math.random() * 150 - 75;
-  const y = Math.random() * 80 - 40;
-  button.style.transform = \`translate(\${x}px, \${y}px)\`;
+  const card = document.querySelector(".card");
+
+  const cardRect = card.getBoundingClientRect();
+  const btnRect = button.getBoundingClientRect();
+
+  // Prüfen, ob wir auf Mobile sind
+  const isMobile = window.innerWidth < 500;
+
+  // Maximalpositionen innerhalb der Karte
+  const maxX = cardRect.width - btnRect.width - 20;
+  const maxY = cardRect.height - btnRect.height - 20;
+
+  // Desktop: volle Bewegung, Mobile: sanftere Bewegung
+  const jumpX = isMobile ? Math.random() * (maxX / 2) : Math.random() * maxX;
+  const jumpY = isMobile ? Math.random() * (maxY / 2) : Math.random() * maxY;
+
+  button.style.transform = `translate(${jumpX}px, ${jumpY}px)`;
 }
+
+// Optional: Beim Fenstergrößenwechsel Buttons zurücksetzen
+window.addEventListener("resize", () => {
+  const button = document.getElementById("no");
+  button.style.transform = `translate(0,0)`;
+});
 </script>
 
 </body>
