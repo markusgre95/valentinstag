@@ -1,55 +1,105 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Alles Liebe zum Valentinstag ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color: white;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>Für Lea ❤️</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      backdrop-filter: blur(10px);
-      max-width: 400px;
-    }
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-width: 400px;
+}
 
-    button {
-      background: white;
-      color: #ff4d6d;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1em;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+img {
+  width: 200px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
 
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-  </style>
+h1 {
+  margin-bottom: 10px;
+}
+
+.buttons {
+  margin-top: 20px;
+  position: relative;
+}
+
+button {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.2s;
+}
+
+#yes {
+  background: white;
+  color: #ff4d6d;
+}
+
+#no {
+  background: #ff4d6d;
+  color: white;
+  position: absolute;
+}
+</style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>❤️ Alles Liebe ❤️</h1>
-    <p>Du machst jeden Tag schöner.</p>
-    <button onclick="alert('Ich hab dich lieb 💕')">Klick mich</button>
+<div class="card">
+  <img src="lea.jpg" alt="Lea ❤️">
+  <h1>Lea ❤️</h1>
+  <p>
+    Du bringst mein Herz zum Lächeln.<br>
+    Und manchmal auch zum Stolpern 😄
+  </p>
+  <h2>Willst du mein Valentin sein?</h2>
+
+  <div class="buttons">
+    <button id="yes" onclick="sayYes()">Ja 💕</button>
+    <button id="no" onmouseover="moveButton()">Nein 😜</button>
   </div>
+</div>
+
+<script>
+function sayYes() {
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;color:white;">
+      <div>
+        <h1>Ich wusste es 😍❤️</h1>
+        <p>Das wird der schönste Valentinstag!</p>
+      </div>
+    </div>
+  `;
+}
+
+function moveButton() {
+  const button = document.getElementById("no");
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  button.style.transform = `translate(${x}px, ${y}px)`;
+}
+</script>
 
 </body>
 </html>
