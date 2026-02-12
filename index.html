@@ -89,19 +89,21 @@ button {
   h1 { font-size: 1.5em; }
   h2 { font-size: 1.2em; }
   p { font-size: 1em; }
+
   .buttons {
     display: flex;
     justify-content: center;
     gap: 15px; /* Abstand zwischen Buttons */
     height: auto;
-    position: static; /* Buttons nicht mehr absolut */
+    position: static; /* absolute entfernen */
   }
-  button { 
-    padding: 12px 20px; 
-    font-size: 1em; 
-    min-width: 90px; 
-    position: relative; /* relativ, damit Flexbox greift */
-    transform: none !important; /* transform zurücksetzen */
+
+  button {
+    position: relative !important; /* absolute aufheben */
+    transform: none !important;    /* transform entfernen */
+    padding: 12px 20px;
+    font-size: 1em;
+    min-width: 90px;
   }
 }
 </style>
